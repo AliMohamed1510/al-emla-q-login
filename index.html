@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>深境 · 登录</title>
+    <title>深境 · تسجيل الدخول</title>
     <!-- Font Awesome (icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', 'Tahoma', system-ui, sans-serif;
         }
 
         body {
@@ -26,7 +26,7 @@
         /* main glass card – depth + mystery */
         .login-card {
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
             background: rgba(12, 15, 22, 0.65);
             backdrop-filter: blur(14px) saturate(180%);
             -webkit-backdrop-filter: blur(14px) saturate(180%);
@@ -66,6 +66,39 @@
             pointer-events: none;
         }
 
+        /* language toggle */
+        .lang-toggle {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(150, 130, 200, 0.2);
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            color: rgba(200, 190, 230, 0.5);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-btn.active {
+            border-color: #a787ff;
+            color: #cdc0f0;
+            background: rgba(120, 90, 200, 0.15);
+            box-shadow: 0 0 20px rgba(100, 70, 200, 0.1);
+        }
+
+        .lang-btn:hover {
+            border-color: #a787ff;
+            color: #e0d8ff;
+        }
+
         h2 {
             font-size: 2.1rem;
             font-weight: 500;
@@ -89,9 +122,16 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             margin-bottom: 2.2rem;
-            border-left: 2px solid #7a5fd0;
-            padding-left: 0.9rem;
+            border-right: 2px solid #7a5fd0;
+            padding-right: 0.9rem;
             font-weight: 300;
+        }
+
+        [dir="ltr"] .subhead {
+            border-right: none;
+            border-left: 2px solid #7a5fd0;
+            padding-right: 0;
+            padding-left: 0.9rem;
         }
 
         .input-group {
@@ -101,7 +141,7 @@
 
         .input-group i {
             position: absolute;
-            left: 1.2rem;
+            right: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
             color: rgba(190, 175, 230, 0.5);
@@ -110,9 +150,14 @@
             pointer-events: none;
         }
 
+        [dir="ltr"] .input-group i {
+            right: auto;
+            left: 1.2rem;
+        }
+
         .input-group input {
             width: 100%;
-            padding: 1rem 1rem 1rem 3.2rem;
+            padding: 1rem 3.2rem 1rem 1rem;
             background: rgba(8, 10, 18, 0.7);
             border: 1px solid rgba(150, 130, 200, 0.15);
             border-radius: 2.5rem;
@@ -122,6 +167,10 @@
             transition: all 0.25s;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(4px);
+        }
+
+        [dir="ltr"] .input-group input {
+            padding: 1rem 1rem 1rem 3.2rem;
         }
 
         .input-group input:focus {
@@ -144,7 +193,7 @@
         /* password toggle (eye) */
         .toggle-pw {
             position: absolute;
-            right: 1.2rem;
+            left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
             background: transparent;
@@ -154,6 +203,11 @@
             font-size: 1rem;
             transition: color 0.2s;
             padding: 0.3rem;
+        }
+
+        [dir="ltr"] .toggle-pw {
+            left: auto;
+            right: 1.2rem;
         }
 
         .toggle-pw:hover {
@@ -246,7 +300,6 @@
             font-size: 0.85rem;
             color: #b8add6;
             text-align: center;
-            border: 1px solid rgba(200, 180, 255, 0.05);
             transition: all 0.2s;
             min-height: 2.6rem;
             display: flex;
@@ -270,13 +323,16 @@
             border-color: rgba(100, 255, 150, 0.1);
         }
 
-        /* small link for demo */
         .hint {
-            text-align: right;
+            text-align: left;
             margin-top: 0.5rem;
             font-size: 0.7rem;
             color: rgba(180, 170, 220, 0.2);
             letter-spacing: 0.5px;
+        }
+
+        [dir="ltr"] .hint {
+            text-align: right;
         }
 
         /* responsive */
@@ -293,170 +349,256 @@
 </head>
 <body>
 
-<div class="login-card">
+<div class="login-card" id="app">
+    <!-- language toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="ar" id="langAr">عربي</button>
+        <button class="lang-btn" data-lang="en" id="langEn">English</button>
+    </div>
+
     <h2>
-        <i class="fas fa-door-open"></i> 深境
+        <i class="fas fa-door-open"></i> 
+        <span id="titleText">深境</span>
     </h2>
-    <div class="subhead">✦ 秘钥 · 入界</div>
+    <div class="subhead" id="subheadText">✦ 秘钥 · 入界</div>
 
     <!-- login form -->
     <form id="loginForm" action="javascript:void(0);">
         <div class="input-group">
-            <input type="email" id="emailInput" placeholder="邮箱 / 账号" required autocomplete="email">
+            <input type="email" id="emailInput" placeholder="البريد الإلكتروني" required autocomplete="email">
             <i class="fas fa-envelope"></i>
         </div>
 
         <div class="input-group">
-            <input type="password" id="passwordInput" placeholder="密码" required autocomplete="current-password">
+            <input type="password" id="passwordInput" placeholder="كلمة المرور" required autocomplete="current-password">
             <i class="fas fa-lock"></i>
-            <button type="button" class="toggle-pw" id="togglePasswordBtn" aria-label="显示密码">
+            <button type="button" class="toggle-pw" id="togglePasswordBtn" aria-label="عرض كلمة المرور">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
 
         <button type="submit" class="login-btn" id="loginSubmitBtn">
-            <i class="fas fa-arrow-right-to-bracket"></i> 进入
+            <i class="fas fa-arrow-right-to-bracket"></i> <span id="loginBtnText">دخول</span>
         </button>
     </form>
 
     <!-- status message -->
     <div id="statusMessage" class="status-msg">
-        <i class="fas fa-circle-info"></i> 等待授权
+        <i class="fas fa-circle-info"></i> <span id="statusText">انتظار الترخيص</span>
     </div>
 
     <!-- register zone -->
     <div class="register-area">
         <button class="register-btn" id="registerNewBtn">
-            <i class="fas fa-user-plus"></i> 注册新凭证
+            <i class="fas fa-user-plus"></i> <span id="registerBtnText">تسجيل جديد</span>
         </button>
     </div>
 
-    <div class="hint">⚡ 黑暗之门</div>
+    <div class="hint" id="hintText">⚡ البوابة المظلمة</div>
 </div>
 
 <script>
     (function() {
-        // ----- 硬编码凭证（你在此添加 邮箱 + 密码） -----
-        // ★ 在这里添加你的邮箱和密码 (可多条)
+        // ----- 硬编码凭证 (你在此添加 邮箱 + 密码) -----
         const VALID_CREDENTIALS = [
-            { email: 'admin@deep.com', password: 'dark123' },      // 示例
-            { email: 'AlEmlaqTravel@outlook.sa', password: 'alemlaq2026' }, // 你的邮箱
-            // 可继续添加更多: { email: '...', password: '...' }
+            { email: 'admin@deep.com', password: 'dark123' },
+            { email: 'AlEmlaqTravel@outlook.sa', password: 'alemlaq2026' },
+            // أضف المزيد هنا: { email: '...', password: '...' }
         ];
 
-        // ----- DOM 元素 -----
+        // ----- DOM Elements -----
         const emailInput = document.getElementById('emailInput');
         const passwordInput = document.getElementById('passwordInput');
         const loginForm = document.getElementById('loginForm');
         const statusDiv = document.getElementById('statusMessage');
+        const statusText = document.getElementById('statusText');
         const togglePwBtn = document.getElementById('togglePasswordBtn');
         const registerBtn = document.getElementById('registerNewBtn');
+        const loginBtnText = document.getElementById('loginBtnText');
+        const registerBtnText = document.getElementById('registerBtnText');
+        const titleText = document.getElementById('titleText');
+        const subheadText = document.getElementById('subheadText');
+        const hintText = document.getElementById('hintText');
+        const langAr = document.getElementById('langAr');
+        const langEn = document.getElementById('langEn');
 
-        // ----- 辅助: 更新状态 -----
-        function setStatus(message, type = 'info') {
-            statusDiv.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'circle-info'}"></i> ${message}`;
+        // ----- Translations -----
+        const translations = {
+            ar: {
+                title: '深境',
+                subhead: '✦ 秘钥 · 入界',
+                emailPlaceholder: 'البريد الإلكتروني',
+                passwordPlaceholder: 'كلمة المرور',
+                loginBtn: 'دخول',
+                registerBtn: 'تسجيل جديد',
+                statusDefault: 'انتظار الترخيص',
+                statusEmpty: 'يرجى إدخال البريد وكلمة المرور',
+                statusError: '✗ البريد أو كلمة المرور خاطئة · حاول مجدداً',
+                statusSuccess: '✓ تم التحقق · جارٍ التوجيه...',
+                statusRegisterSent: '📨 تم إرسال البيانات إلى البريد وواتساب',
+                statusRegisterEmpty: 'يرجى ملء البريد وكلمة المرور للتسجيل',
+                hint: '⚡ البوابة المظلمة',
+                toggleLabel: 'عرض كلمة المرور'
+            },
+            en: {
+                title: 'Deep Gate',
+                subhead: '✦ Key · Enter',
+                emailPlaceholder: 'Email / Account',
+                passwordPlaceholder: 'Password',
+                loginBtn: 'Login',
+                registerBtn: 'Register New',
+                statusDefault: 'Awaiting authorization',
+                statusEmpty: 'Please enter email and password',
+                statusError: '✗ Email or password is incorrect · Try again',
+                statusSuccess: '✓ Verified · Redirecting...',
+                statusRegisterSent: '📨 Credentials sent to email & WhatsApp',
+                statusRegisterEmpty: 'Please fill in email and password to register',
+                hint: '⚡ Dark Portal',
+                toggleLabel: 'Show password'
+            }
+        };
+
+        let currentLang = 'ar';
+
+        // ----- Apply language -----
+        function applyLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Update placeholders
+            emailInput.placeholder = t.emailPlaceholder;
+            passwordInput.placeholder = t.passwordPlaceholder;
+
+            // Update texts
+            titleText.textContent = t.title;
+            subheadText.textContent = t.subhead;
+            loginBtnText.textContent = t.loginBtn;
+            registerBtnText.textContent = t.registerBtn;
+            statusText.textContent = t.statusDefault;
+            hintText.textContent = t.hint;
+
+            // Toggle button active state
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if (lang === 'ar') {
+                langAr.classList.add('active');
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            } else {
+                langEn.classList.add('active');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            }
+
+            // Update toggle button label
+            togglePwBtn.setAttribute('aria-label', t.toggleLabel);
+
+            // Update status if it's default (to keep translation)
+            const currentStatus = statusText.textContent;
+            if (currentStatus === translations.ar.statusDefault || currentStatus === translations.en.statusDefault) {
+                statusText.textContent = t.statusDefault;
+            }
+        }
+
+        // ----- Set status with translation support -----
+        function setStatus(messageKey, type = 'info') {
+            const t = translations[currentLang];
+            let msg = messageKey;
+            // if messageKey is a key in translations
+            if (t[messageKey]) {
+                msg = t[messageKey];
+            }
+            statusText.textContent = msg;
             statusDiv.className = 'status-msg';
             if (type === 'error') statusDiv.classList.add('error');
             else if (type === 'success') statusDiv.classList.add('success');
         }
 
-        // ----- 登录逻辑 (只验证硬编码) -----
+        // ----- Login logic -----
         function handleLogin() {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
 
             if (!email || !password) {
-                setStatus('请输入邮箱和密码', 'error');
+                setStatus('statusEmpty', 'error');
                 return false;
             }
 
-            // 检查凭证
             const matched = VALID_CREDENTIALS.some(cred => 
                 cred.email.toLowerCase() === email.toLowerCase() && cred.password === password
             );
 
             if (matched) {
-                setStatus('✓ 验证通过 · 即将重定向...', 'success');
-                // 重定向到目标地址
+                setStatus('statusSuccess', 'success');
                 setTimeout(() => {
                     window.location.href = 'https://al-emla-q-files.vercel.app/#';
                 }, 800);
                 return true;
             } else {
-                setStatus('✗ 邮箱或密码错误 · 请重试', 'error');
+                setStatus('statusError', 'error');
                 return false;
             }
         }
 
-        // ----- 注册新账号: 发送数据到 邮箱 + WhatsApp -----
+        // ----- Register: send to email + WhatsApp -----
         function handleRegister() {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
 
             if (!email || !password) {
-                setStatus('请填写邮箱和密码再注册', 'error');
+                setStatus('statusRegisterEmpty', 'error');
                 return;
             }
 
-            // 构造信息
-            const subject = encodeURIComponent('🔮 新注册凭证 (深境登录)');
+            const subject = encodeURIComponent('🔮 تسجيل جديد (深境)');
             const body = encodeURIComponent(
-                `新用户注册:\n📧 邮箱: ${email}\n🔑 密码: ${password}\n\n—— 来自登录页 · 深境系统`
+                `新用户注册 / New registration:\n📧 邮箱 / Email: ${email}\n🔑 密码 / Password: ${password}\n\n—— 来自登录页 · From login page`
             );
 
-            // 1. 邮箱 (AlEmlaqTravel@outlook.sa)
+            // Email: AlEmlaqTravel@outlook.sa
             const mailtoLink = `mailto:AlEmlaqTravel@outlook.sa?subject=${subject}&body=${body}`;
 
-            // 2. WhatsApp (号码 +201509025388)
-            const phone = '201509025388'; 
+            // WhatsApp: +201509025388
+            const phone = '201509025388';
             const waLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
-                `📩 *新注册数据*\n邮箱: ${email}\n密码: ${password}\n\n(来自登录页)`
+                `📩 *New Registration*\nEmail: ${email}\nPassword: ${password}\n\n(From login page)`
             )}`;
 
-            // 显示状态
-            setStatus(`📨 凭证已发送至邮箱 & WhatsApp`, 'success');
+            setStatus('statusRegisterSent', 'success');
 
-            // 打开两个窗口 (邮箱 + WhatsApp)
-            // 邮箱: 使用 mailto (可能会打开默认客户端)
+            // Open mail & WhatsApp
             window.open(mailtoLink, '_blank');
-
-            // WhatsApp: 延迟一点点打开，避免被浏览器拦截
             setTimeout(() => {
                 window.open(waLink, '_blank');
             }, 400);
 
-            // 可选: 在控制台输出 (便于调试)
-            console.log(`[注册] 邮箱: ${email} | 密码: ${password}`);
-            console.log(`📧 发送至 AlEmlaqTravel@outlook.sa`);
-            console.log(`📱 WhatsApp: +${phone}`);
+            console.log(`[Register] Email: ${email} | Password: ${password}`);
         }
 
-        // ----- 事件绑定 -----
-        // 登录提交
+        // ----- Event Listeners -----
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleLogin();
         });
 
-        // 回车键可以直接触发登录 (已经由form submit处理)
-
-        // 显示/隐藏密码 (深度感)
         togglePwBtn.addEventListener('click', function() {
             const isPassword = passwordInput.type === 'password';
             passwordInput.type = isPassword ? 'text' : 'password';
             this.querySelector('i').className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
         });
 
-        // 注册按钮
-        registerBtn.addEventListener('click', function() {
-            handleRegister();
+        registerBtn.addEventListener('click', handleRegister);
+
+        // Language switching
+        langAr.addEventListener('click', function() {
+            applyLanguage('ar');
+        });
+        langEn.addEventListener('click', function() {
+            applyLanguage('en');
         });
 
-        // 初始状态
-        setStatus('⌛ 输入凭证 · 或注册新账号', 'info');
-
-        // 额外：如果url带# 或 其他 (仅演示)
-        console.log('✦ 深境登录 · 暗黑之门');
+        // ----- Init -----
+        applyLanguage('ar'); // default Arabic
+        setStatus('statusDefault', 'info');
     })();
 </script>
 
