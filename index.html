@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل جديد</title>
+    <title>تسجيل الدخول والتسجيل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -22,7 +22,7 @@
             padding: 1.5rem;
         }
 
-        .register-card {
+        .main-container {
             width: 100%;
             max-width: 500px;
             background: rgba(12, 15, 22, 0.7);
@@ -36,7 +36,7 @@
             overflow: hidden;
         }
 
-        .register-card::before {
+        .main-container::before {
             content: '';
             position: absolute;
             inset: -2px;
@@ -76,8 +76,58 @@
             color: #e0d8ff;
         }
 
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.8rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3rem;
+            padding: 0.3rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 2.5rem;
+            background: transparent;
+            color: rgba(200, 190, 230, 0.4);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #6a4fcf, #3f2b8a);
+            color: #f2edff;
+            box-shadow: 0 4px 15px rgba(70, 40, 150, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #cdc0f0;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 500;
             color: rgba(245, 240, 255, 0.9);
             text-shadow: 0 0 20px rgba(140, 100, 255, 0.2);
@@ -89,7 +139,7 @@
 
         h2 i {
             color: #b79aff;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             filter: drop-shadow(0 0 10px #7755dd);
         }
 
@@ -205,7 +255,7 @@
             border-radius: 4px;
         }
 
-        .register-btn {
+        .action-btn {
             width: 100%;
             padding: 0.9rem;
             background: linear-gradient(135deg, #6a4fcf, #3f2b8a);
@@ -225,43 +275,14 @@
             margin-top: 0.3rem;
         }
 
-        .register-btn:hover {
+        .action-btn:hover {
             transform: scale(1.02);
             background: linear-gradient(135deg, #7d62e0, #4d3399);
             box-shadow: 0 10px 30px rgba(90, 50, 200, 0.5);
         }
 
-        .register-btn:active {
+        .action-btn:active {
             transform: scale(0.98);
-        }
-
-        .back-area {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: center;
-            border-top: 1px solid rgba(150, 130, 200, 0.08);
-            padding-top: 1.2rem;
-        }
-
-        .back-btn {
-            background: transparent;
-            border: 1px solid rgba(180, 160, 230, 0.12);
-            border-radius: 3rem;
-            padding: 0.5rem 1.8rem;
-            color: rgba(200, 190, 230, 0.5);
-            font-weight: 300;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-btn:hover {
-            border-color: #a787ff;
-            color: #cdc0f0;
-            background: rgba(120, 90, 200, 0.08);
         }
 
         .status-msg {
@@ -292,176 +313,265 @@
         }
 
         @media (max-width: 480px) {
-            .register-card {
+            .main-container {
                 padding: 1.8rem 1.2rem 2rem;
             }
             h2 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+            }
+            .tab-btn {
+                font-size: 0.8rem;
+                padding: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="register-card">
+<div class="main-container">
+    <!-- تبديل اللغة -->
     <div class="lang-toggle">
         <button class="lang-btn active" data-lang="ar" id="langAr">عربي</button>
         <button class="lang-btn" data-lang="en" id="langEn">English</button>
     </div>
 
-    <h2><i class="fas fa-user-plus"></i> <span id="titleText">إنشاء حساب</span></h2>
-    <div class="subhead" id="subheadText">✦ انضم إلينا الآن</div>
-
-    <form id="registerForm">
-        <div class="input-group">
-            <input type="text" id="firstName" placeholder="الاسم الأول" required>
-            <i class="fas fa-user"></i>
-        </div>
-
-        <div class="input-group">
-            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
-            <i class="fas fa-user-tag"></i>
-        </div>
-
-        <div class="input-group">
-            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-            <i class="fas fa-envelope"></i>
-        </div>
-
-        <div class="input-group">
-            <input type="email" id="confirmEmail" placeholder="تأكيد البريد الإلكتروني" required>
-            <i class="fas fa-envelope-circle-check"></i>
-        </div>
-
-        <div class="input-group">
-            <input type="password" id="password" placeholder="كلمة المرور" required>
-            <i class="fas fa-lock"></i>
-            <button type="button" class="toggle-pw" id="togglePasswordBtn">
-                <i class="fas fa-eye"></i>
-            </button>
-        </div>
-
-        <div class="input-group">
-            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
-            <i class="fas fa-lock"></i>
-            <button type="button" class="toggle-pw" id="toggleConfirmPasswordBtn">
-                <i class="fas fa-eye"></i>
-            </button>
-        </div>
-
-        <div class="checkbox-group">
-            <input type="checkbox" id="termsCheckbox" required>
-            <label for="termsCheckbox" id="termsLabel">أوافق على الشروط والأحكام</label>
-        </div>
-
-        <button type="submit" class="register-btn">
-            <i class="fas fa-user-check"></i> <span id="registerBtnText">تسجيل</span>
+    <!-- التبويبات -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="login" id="tabLogin">
+            <i class="fas fa-sign-in-alt"></i> <span id="tabLoginText">دخول</span>
         </button>
-    </form>
-
-    <div id="statusMessage" class="status-msg">
-        <i class="fas fa-circle-info"></i> <span id="statusText">املأ البيانات للتسجيل</span>
+        <button class="tab-btn" data-tab="register" id="tabRegister">
+            <i class="fas fa-user-plus"></i> <span id="tabRegisterText">تسجيل</span>
+        </button>
     </div>
 
-    <div class="back-area">
-        <button class="back-btn" id="backToLoginBtn">
-            <i class="fas fa-arrow-left"></i> <span id="backBtnText">العودة لتسجيل الدخول</span>
-        </button>
+    <!-- ====== تبويب تسجيل الدخول ====== -->
+    <div class="tab-content active" id="loginTab">
+        <h2><i class="fas fa-archway"></i> <span id="loginTitle">تسجيل الدخول</span></h2>
+        <div class="subhead" id="loginSubhead">✦ مرحباً بعودتك</div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                <i class="fas fa-lock"></i>
+                <button type="button" class="toggle-pw" id="loginTogglePw">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="action-btn">
+                <i class="fas fa-sign-in-alt"></i> <span id="loginBtnText">دخول</span>
+            </button>
+        </form>
+
+        <div id="loginStatus" class="status-msg">
+            <i class="fas fa-circle-info"></i> <span id="loginStatusText">انتظار الترخيص</span>
+        </div>
+    </div>
+
+    <!-- ====== تبويب التسجيل الجديد ====== -->
+    <div class="tab-content" id="registerTab">
+        <h2><i class="fas fa-user-plus"></i> <span id="registerTitle">إنشاء حساب</span></h2>
+        <div class="subhead" id="registerSubhead">✦ انضم إلينا الآن</div>
+
+        <form id="registerForm">
+            <div class="input-group">
+                <input type="text" id="regFirstName" placeholder="الاسم الأول" required>
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="regLastName" placeholder="الاسم الأخير" required>
+                <i class="fas fa-user-tag"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="regEmail" placeholder="البريد الإلكتروني" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="regConfirmEmail" placeholder="تأكيد البريد الإلكتروني" required>
+                <i class="fas fa-envelope-circle-check"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="regPassword" placeholder="كلمة المرور" required>
+                <i class="fas fa-lock"></i>
+                <button type="button" class="toggle-pw" id="regTogglePw">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="regConfirmPassword" placeholder="تأكيد كلمة المرور" required>
+                <i class="fas fa-lock"></i>
+                <button type="button" class="toggle-pw" id="regToggleConfirmPw">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="termsCheckbox" required>
+                <label for="termsCheckbox" id="termsLabel">أوافق على الشروط والأحكام</label>
+            </div>
+
+            <button type="submit" class="action-btn">
+                <i class="fas fa-user-check"></i> <span id="registerBtnText">تسجيل</span>
+            </button>
+        </form>
+
+        <div id="registerStatus" class="status-msg">
+            <i class="fas fa-circle-info"></i> <span id="registerStatusText">املأ البيانات للتسجيل</span>
+        </div>
     </div>
 </div>
 
 <script>
     (function() {
+        // ====== بيانات الدخول الصحيحة ======
+        const VALID_CREDENTIALS = [
+            { email: 'AlEmlaqTravel@outlook.sa', password: 'alemlaq2026' },
+            { email: 'admin@demo.com', password: '123456' }
+        ];
+
         // ====== الترجمات ======
         const lang = {
             ar: {
-                title: 'إنشاء حساب',
-                subhead: '✦ انضم إلينا الآن',
-                firstName: 'الاسم الأول',
-                lastName: 'الاسم الأخير',
-                email: 'البريد الإلكتروني',
-                confirmEmail: 'تأكيد البريد الإلكتروني',
-                password: 'كلمة المرور',
-                confirmPassword: 'تأكيد كلمة المرور',
+                tabLogin: 'دخول',
+                tabRegister: 'تسجيل',
+                loginTitle: 'تسجيل الدخول',
+                loginSubhead: '✦ مرحباً بعودتك',
+                loginEmail: 'البريد الإلكتروني',
+                loginPassword: 'كلمة المرور',
+                loginBtn: 'دخول',
+                loginStatus: 'انتظار الترخيص',
+                loginEmpty: 'يرجى إدخال البريد وكلمة المرور',
+                loginError: '✗ البريد أو كلمة المرور خاطئة',
+                loginSuccess: '✓ تم التحقق · جارٍ التوجيه...',
+                registerTitle: 'إنشاء حساب',
+                registerSubhead: '✦ انضم إلينا الآن',
+                regFirstName: 'الاسم الأول',
+                regLastName: 'الاسم الأخير',
+                regEmail: 'البريد الإلكتروني',
+                regConfirmEmail: 'تأكيد البريد الإلكتروني',
+                regPassword: 'كلمة المرور',
+                regConfirmPassword: 'تأكيد كلمة المرور',
                 terms: 'أوافق على الشروط والأحكام',
-                register: 'تسجيل',
-                back: 'العودة لتسجيل الدخول',
-                statusDefault: 'املأ البيانات للتسجيل',
-                statusEmpty: 'يرجى ملء جميع الحقول',
-                statusEmailMismatch: '✗ البريد الإلكتروني غير متطابق',
-                statusPasswordMismatch: '✗ كلمة المرور غير متطابقة',
-                statusTerms: '✗ يرجى الموافقة على الشروط',
-                statusSuccess: '✓ تم التسجيل بنجاح! جارٍ الإرسال...',
-                statusSendError: '⚠️ حدث خطأ، حاول مرة أخرى'
+                registerBtn: 'تسجيل',
+                registerStatus: 'املأ البيانات للتسجيل',
+                regEmpty: 'يرجى ملء جميع الحقول',
+                regEmailMismatch: '✗ البريد الإلكتروني غير متطابق',
+                regPasswordMismatch: '✗ كلمة المرور غير متطابقة',
+                regTerms: '✗ يرجى الموافقة على الشروط',
+                regSuccess: '✓ تم التسجيل بنجاح! جارٍ الإرسال...'
             },
             en: {
-                title: 'Create Account',
-                subhead: '✦ Join Us Now',
-                firstName: 'First Name',
-                lastName: 'Last Name',
-                email: 'Email',
-                confirmEmail: 'Confirm Email',
-                password: 'Password',
-                confirmPassword: 'Confirm Password',
+                tabLogin: 'Login',
+                tabRegister: 'Register',
+                loginTitle: 'Login',
+                loginSubhead: '✦ Welcome Back',
+                loginEmail: 'Email',
+                loginPassword: 'Password',
+                loginBtn: 'Login',
+                loginStatus: 'Awaiting authorization',
+                loginEmpty: 'Please enter email and password',
+                loginError: '✗ Email or password is incorrect',
+                loginSuccess: '✓ Verified · Redirecting...',
+                registerTitle: 'Create Account',
+                registerSubhead: '✦ Join Us Now',
+                regFirstName: 'First Name',
+                regLastName: 'Last Name',
+                regEmail: 'Email',
+                regConfirmEmail: 'Confirm Email',
+                regPassword: 'Password',
+                regConfirmPassword: 'Confirm Password',
                 terms: 'I agree to the Terms & Conditions',
-                register: 'Register',
-                back: 'Back to Login',
-                statusDefault: 'Fill in the data to register',
-                statusEmpty: 'Please fill in all fields',
-                statusEmailMismatch: '✗ Email does not match',
-                statusPasswordMismatch: '✗ Password does not match',
-                statusTerms: '✗ Please agree to the terms',
-                statusSuccess: '✓ Registration successful! Sending...',
-                statusSendError: '⚠️ An error occurred, please try again'
+                registerBtn: 'Register',
+                registerStatus: 'Fill in the data to register',
+                regEmpty: 'Please fill in all fields',
+                regEmailMismatch: '✗ Email does not match',
+                regPasswordMismatch: '✗ Password does not match',
+                regTerms: '✗ Please agree to the terms',
+                regSuccess: '✓ Registration successful! Sending...'
             }
         };
 
         let currentLang = 'ar';
 
         // ====== العناصر ======
-        const firstName = document.getElementById('firstName');
-        const lastName = document.getElementById('lastName');
-        const email = document.getElementById('email');
-        const confirmEmail = document.getElementById('confirmEmail');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
+        // Login
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        const loginForm = document.getElementById('loginForm');
+        const loginStatusText = document.getElementById('loginStatusText');
+        const loginStatusDiv = document.getElementById('loginStatus');
+        const loginTogglePw = document.getElementById('loginTogglePw');
+
+        // Register
+        const regFirstName = document.getElementById('regFirstName');
+        const regLastName = document.getElementById('regLastName');
+        const regEmail = document.getElementById('regEmail');
+        const regConfirmEmail = document.getElementById('regConfirmEmail');
+        const regPassword = document.getElementById('regPassword');
+        const regConfirmPassword = document.getElementById('regConfirmPassword');
         const termsCheckbox = document.getElementById('termsCheckbox');
         const registerForm = document.getElementById('registerForm');
-        const statusText = document.getElementById('statusText');
-        const statusDiv = document.getElementById('statusMessage');
-        const togglePwBtn = document.getElementById('togglePasswordBtn');
-        const toggleConfirmPwBtn = document.getElementById('toggleConfirmPasswordBtn');
-        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        const registerStatusText = document.getElementById('registerStatusText');
+        const registerStatusDiv = document.getElementById('registerStatus');
+        const regTogglePw = document.getElementById('regTogglePw');
+        const regToggleConfirmPw = document.getElementById('regToggleConfirmPw');
+
+        // Tabs
+        const tabLogin = document.getElementById('tabLogin');
+        const tabRegister = document.getElementById('tabRegister');
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+
+        // Language elements
         const langAr = document.getElementById('langAr');
         const langEn = document.getElementById('langEn');
-
-        const titleText = document.getElementById('titleText');
-        const subheadText = document.getElementById('subheadText');
-        const registerBtnText = document.getElementById('registerBtnText');
-        const backBtnText = document.getElementById('backBtnText');
-        const termsLabel = document.getElementById('termsLabel');
 
         // ====== تطبيق اللغة ======
         function applyLanguage(l) {
             currentLang = l;
             const t = lang[l];
 
-            titleText.textContent = t.title;
-            subheadText.textContent = t.subhead;
-            firstName.placeholder = t.firstName;
-            lastName.placeholder = t.lastName;
-            email.placeholder = t.email;
-            confirmEmail.placeholder = t.confirmEmail;
-            password.placeholder = t.password;
-            confirmPassword.placeholder = t.confirmPassword;
-            termsLabel.textContent = t.terms;
-            registerBtnText.textContent = t.register;
-            backBtnText.textContent = t.back;
+            // Tabs
+            document.getElementById('tabLoginText').textContent = t.tabLogin;
+            document.getElementById('tabRegisterText').textContent = t.tabRegister;
 
-            if (statusText.textContent === lang.ar.statusDefault || statusText.textContent === lang.en.statusDefault) {
-                statusText.textContent = t.statusDefault;
+            // Login
+            document.getElementById('loginTitle').textContent = t.loginTitle;
+            document.getElementById('loginSubhead').textContent = t.loginSubhead;
+            loginEmail.placeholder = t.loginEmail;
+            loginPassword.placeholder = t.loginPassword;
+            document.getElementById('loginBtnText').textContent = t.loginBtn;
+            if (loginStatusText.textContent === lang.ar.loginStatus || loginStatusText.textContent === lang.en.loginStatus) {
+                loginStatusText.textContent = t.loginStatus;
             }
 
+            // Register
+            document.getElementById('registerTitle').textContent = t.registerTitle;
+            document.getElementById('registerSubhead').textContent = t.registerSubhead;
+            regFirstName.placeholder = t.regFirstName;
+            regLastName.placeholder = t.regLastName;
+            regEmail.placeholder = t.regEmail;
+            regConfirmEmail.placeholder = t.regConfirmEmail;
+            regPassword.placeholder = t.regPassword;
+            regConfirmPassword.placeholder = t.regConfirmPassword;
+            document.getElementById('termsLabel').textContent = t.terms;
+            document.getElementById('registerBtnText').textContent = t.registerBtn;
+            if (registerStatusText.textContent === lang.ar.registerStatus || registerStatusText.textContent === lang.en.registerStatus) {
+                registerStatusText.textContent = t.registerStatus;
+            }
+
+            // Active language button
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (l === 'ar') {
                 langAr.classList.add('active');
@@ -475,91 +585,136 @@
         }
 
         // ====== عرض الحالة ======
-        function setStatus(key, type = 'info') {
+        function setLoginStatus(key, type = 'info') {
             const t = lang[currentLang];
-            statusText.textContent = t[key] || key;
-            statusDiv.className = 'status-msg';
-            if (type === 'error') statusDiv.classList.add('error');
-            else if (type === 'success') statusDiv.classList.add('success');
+            loginStatusText.textContent = t[key] || key;
+            loginStatusDiv.className = 'status-msg';
+            if (type === 'error') loginStatusDiv.classList.add('error');
+            else if (type === 'success') loginStatusDiv.classList.add('success');
         }
 
-        // ====== إرسال البيانات ======
-        function sendData(data) {
-            const { firstName: fn, lastName: ln, email: em, password: pw } = data;
+        function setRegisterStatus(key, type = 'info') {
+            const t = lang[currentLang];
+            registerStatusText.textContent = t[key] || key;
+            registerStatusDiv.className = 'status-msg';
+            if (type === 'error') registerStatusDiv.classList.add('error');
+            else if (type === 'success') registerStatusDiv.classList.add('success');
+        }
 
-            const subject = encodeURIComponent(`🔐 تسجيل جديد - ${fn} ${ln}`);
+        // ====== تبديل التبويبات ======
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                tabLogin.classList.add('active');
+            } else {
+                registerTab.classList.add('active');
+                tabRegister.classList.add('active');
+            }
+        }
+
+        tabLogin.addEventListener('click', () => switchTab('login'));
+        tabRegister.addEventListener('click', () => switchTab('register'));
+
+        // ====== معالج تسجيل الدخول ======
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value.trim();
+
+            if (!email || !password) {
+                setLoginStatus('loginEmpty', 'error');
+                return;
+            }
+
+            const matched = VALID_CREDENTIALS.some(c => 
+                c.email.toLowerCase() === email.toLowerCase() && c.password === password
+            );
+
+            if (matched) {
+                setLoginStatus('loginSuccess', 'success');
+                setTimeout(() => {
+                    window.location.href = 'https://al-emla-q-files.vercel.app/#';
+                }, 700);
+            } else {
+                setLoginStatus('loginError', 'error');
+            }
+        }
+
+        // ====== إرسال بيانات التسجيل ======
+        function sendRegistrationData(data) {
+            const { firstName, lastName, email, password } = data;
+
+            const subject = encodeURIComponent(`🔐 تسجيل جديد - ${firstName} ${lastName}`);
             const body = encodeURIComponent(
                 `📋 بيانات التسجيل الجديد:\n\n` +
-                `👤 الاسم الأول: ${fn}\n` +
-                `👤 الاسم الأخير: ${ln}\n` +
-                `📧 البريد الإلكتروني: ${em}\n` +
-                `🔑 كلمة المرور: ${pw}\n\n` +
+                `👤 الاسم الأول: ${firstName}\n` +
+                `👤 الاسم الأخير: ${lastName}\n` +
+                `📧 البريد الإلكتروني: ${email}\n` +
+                `🔑 كلمة المرور: ${password}\n\n` +
                 `─ ─ ─ ─ ─ ─ ─ ─ ─ ─\n` +
                 `🕒 تم التسجيل من صفحة الويب`
             );
 
             const mailtoLink = `mailto:AlEmlaqTravel@outlook.sa?subject=${subject}&body=${body}`;
-
             const phone = '201509025388';
             const waLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
                 `🔐 *تسجيل جديد*\n\n` +
-                `👤 الاسم: ${fn} ${ln}\n` +
-                `📧 البريد: ${em}\n` +
-                `🔑 كلمة المرور: ${pw}\n\n` +
+                `👤 الاسم: ${firstName} ${lastName}\n` +
+                `📧 البريد: ${email}\n` +
+                `🔑 كلمة المرور: ${password}\n\n` +
                 `(تم التسجيل من الموقع)`
             )}`;
 
-            // فتح البريد وواتساب
             window.open(mailtoLink, '_blank');
             setTimeout(() => {
                 window.open(waLink, '_blank');
             }, 500);
 
-            console.log('✅ تم إرسال البيانات:');
-            console.log(data);
+            console.log('✅ تم إرسال البيانات:', data);
         }
 
         // ====== معالج التسجيل ======
         function handleRegister(e) {
             e.preventDefault();
 
-            const fn = firstName.value.trim();
-            const ln = lastName.value.trim();
-            const em = email.value.trim();
-            const cem = confirmEmail.value.trim();
-            const pw = password.value.trim();
-            const cpw = confirmPassword.value.trim();
+            const fn = regFirstName.value.trim();
+            const ln = regLastName.value.trim();
+            const em = regEmail.value.trim();
+            const cem = regConfirmEmail.value.trim();
+            const pw = regPassword.value.trim();
+            const cpw = regConfirmPassword.value.trim();
 
             if (!fn || !ln || !em || !cem || !pw || !cpw) {
-                setStatus('statusEmpty', 'error');
+                setRegisterStatus('regEmpty', 'error');
                 return;
             }
 
             if (em !== cem) {
-                setStatus('statusEmailMismatch', 'error');
+                setRegisterStatus('regEmailMismatch', 'error');
                 return;
             }
 
             if (pw !== cpw) {
-                setStatus('statusPasswordMismatch', 'error');
+                setRegisterStatus('regPasswordMismatch', 'error');
                 return;
             }
 
             if (!termsCheckbox.checked) {
-                setStatus('statusTerms', 'error');
+                setRegisterStatus('regTerms', 'error');
                 return;
             }
 
-            // كل شيء صحيح
-            setStatus('statusSuccess', 'success');
+            setRegisterStatus('regSuccess', 'success');
 
             const data = { firstName: fn, lastName: ln, email: em, password: pw };
-            sendData(data);
+            sendRegistrationData(data);
 
-            // تنظيف الحقول بعد الإرسال (اختياري)
             setTimeout(() => {
                 registerForm.reset();
-                setStatus('statusDefault');
+                setRegisterStatus('registerStatus');
             }, 3000);
         }
 
@@ -570,29 +725,30 @@
             btn.querySelector('i').className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
         }
 
-        togglePwBtn.addEventListener('click', function() {
-            togglePassword(password, this);
+        loginTogglePw.addEventListener('click', function() {
+            togglePassword(loginPassword, this);
         });
 
-        toggleConfirmPwBtn.addEventListener('click', function() {
-            togglePassword(confirmPassword, this);
+        regTogglePw.addEventListener('click', function() {
+            togglePassword(regPassword, this);
         });
 
-        // ====== العودة لتسجيل الدخول ======
-        backToLoginBtn.addEventListener('click', function() {
-            window.location.href = 'login.html';
+        regToggleConfirmPw.addEventListener('click', function() {
+            togglePassword(regConfirmPassword, this);
         });
+
+        // ====== أحداث النماذج ======
+        loginForm.addEventListener('submit', handleLogin);
+        registerForm.addEventListener('submit', handleRegister);
 
         // ====== تبديل اللغة ======
         langAr.addEventListener('click', () => applyLanguage('ar'));
         langEn.addEventListener('click', () => applyLanguage('en'));
 
-        // ====== أحداث النموذج ======
-        registerForm.addEventListener('submit', handleRegister);
-
         // ====== بدء التشغيل ======
         applyLanguage('ar');
-        setStatus('statusDefault');
+        setLoginStatus('loginStatus');
+        setRegisterStatus('registerStatus');
     })();
 </script>
 
